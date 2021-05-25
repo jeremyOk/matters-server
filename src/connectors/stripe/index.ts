@@ -37,6 +37,7 @@ class StripeService {
 
   constructor() {
     let options: Record<string, any> = {}
+    console.log({ isTest })
     if (isTest) {
       options = LOCAL_STRIPE
     }

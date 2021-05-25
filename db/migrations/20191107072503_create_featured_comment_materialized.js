@@ -1,7 +1,7 @@
 const table = 'featured_comment_materialized'
 
-exports.up = async (knex) => {
-  await knex.raw(/*sql*/ `
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
   create materialized view ${table} as
   select *
     from (
@@ -24,8 +24,6 @@ exports.up = async (knex) => {
       where parent_comment_id is null) as comment_score
   where pinned = true or score > 20
   `)
-}
 
-exports.down = function (knex, Promise) {
-  return knex.raw(/*sql*/ `drop materialized view ${table}`)
-}
+exports.down = (knex) =>
+  knex.raw(/*sql*/ `drop materialized view if exists ${table}`)

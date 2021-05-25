@@ -3,8 +3,8 @@
  * of fixing wrong read_time in article_read_count.
  */
 
-exports.up = async (knex) => {
-  await knex.raw(`
+exports.up = (knex) =>
+  knex.raw(`
     UPDATE
         article_read_count
     SET
@@ -26,6 +26,5 @@ exports.up = async (knex) => {
     ) AS source
     WHERE article_read_count.id = source.id
   `)
-}
 
 exports.down = async (knex) => {}

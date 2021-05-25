@@ -63,5 +63,5 @@ exports.up = async (knex) => {
 
 exports.down = (knex) =>
   knex.raw(/*sql*/ `
-    drop view ${view} cascade;
+    drop view if exists ${view} cascade;
   `)

@@ -1,9 +1,9 @@
 const view = `article_value_view`
 const materialized = `article_value_materialized`
 
-exports.up = async (knex) => {
-  await knex.raw(/*sql*/ `
-  drop view ${view} cascade;
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
+  drop view if exists ${view} cascade;
 
   create view ${view} as
   select id,
@@ -83,6 +83,5 @@ exports.up = async (knex) => {
   select *
   from ${view}
   `)
-}
 
-exports.down = function (knex, Promise) {}
+exports.down = (knex, Promise) => Promise.resolve()

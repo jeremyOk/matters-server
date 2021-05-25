@@ -3,7 +3,7 @@ const materialized = `article_value_materialized`
 
 exports.up = (knex) =>
   knex.raw(/*sql*/ `
-  drop view ${view} cascade;
+  drop view if exists ${view} cascade;
 
   create view ${view} as
   select id,
@@ -75,7 +75,7 @@ exports.up = (knex) =>
 
 exports.down = (knex) =>
   knex.raw(/*sql*/ `
-  drop view ${view} cascade;
+  drop view if exists ${view} cascade;
 
   create view ${view} as
   select id,

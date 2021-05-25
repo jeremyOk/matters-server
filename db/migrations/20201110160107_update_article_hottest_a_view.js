@@ -4,8 +4,8 @@ const materialized = `article_hottest_a_materialized`
 const time_window = 3
 const donation_decay_factor = 0.8
 
-exports.up = async (knex) => {
-  await knex.raw(/*sql*/ `
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
   drop view if exists ${view} cascade;
 
   create view ${view} as
@@ -69,10 +69,8 @@ exports.up = async (knex) => {
   select *
   from ${view}
   `)
-}
 
-exports.down = function (knex) {
+exports.down = (knex) =>
   knex.raw(/*sql*/ `
-  drop view ${view} cascade;
+  drop view if exists ${view} cascade;
   `)
-}

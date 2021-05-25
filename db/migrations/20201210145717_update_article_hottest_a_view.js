@@ -7,8 +7,8 @@ const boost = 1
 const boost_window = 3
 const matty_donation_decay_factor = 0.95
 
-exports.up = async (knex) => {
-  await knex.raw(/*sql*/ `
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
   drop view if exists ${view} cascade;
 
   create view ${view} as
@@ -87,10 +87,8 @@ exports.up = async (knex) => {
   select *
   from ${view}
   `)
-}
 
-exports.down = function (knex) {
+exports.down = (knex) =>
   knex.raw(/*sql*/ `
-  drop view ${view} cascade;
+  drop view if exists ${view} cascade;
   `)
-}

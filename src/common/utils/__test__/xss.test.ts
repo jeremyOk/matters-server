@@ -64,7 +64,7 @@ test('invalid contents', async () => {
     // iframe:src
     {
       content:
-        '<iframe sandbox="allow-scripts allow-same-origin" src=example.com></iframe>',
+        '<iframe sandbox="allow-scripts allow-same-origin" src=https://example.com></iframe>',
       toMatch: '<iframe sandbox="allow-scripts allow-same-origin"></iframe>',
     },
     // iframe:sandbox

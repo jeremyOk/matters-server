@@ -1,5 +1,5 @@
 const table = 'user'
 
-exports.up = async (knex) => await knex(table).update('state', 'onboarding')
+exports.up = (knex) => knex(table).update('state', 'onboarding')
 
-exports.down = () => {}
+exports.down = (knex, Promise) => Promise.resolve()

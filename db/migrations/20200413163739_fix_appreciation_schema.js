@@ -1,5 +1,5 @@
-exports.up = (knex) => {
-  return knex.raw(/*sql*/ `
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
   -- fill in data
   update appreciation
   set
@@ -44,6 +44,5 @@ exports.up = (knex) => {
   alter table appreciation
     alter column id set default nextval('appreciation_id_seq');
   `)
-}
 
-exports.down = () => {}
+exports.down = (knex, Promise) => Promise.resolve()

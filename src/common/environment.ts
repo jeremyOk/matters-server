@@ -39,6 +39,12 @@ if (process.env.MATTERS_OICD_PRIVATE_KEY) {
   }
 }
 
+export const isLocal = process.env.MATTERS_ENV === 'local'
+export const isTest = process.env.MATTERS_ENV === 'test'
+export const isDev = process.env.MATTERS_ENV === 'development'
+export const isStage = process.env.MATTERS_ENV === 'stage'
+export const isProd = process.env.MATTERS_ENV === 'production'
+
 /**
  * Here are all environment variables that server needs. Please add prefix
  * `MATTERS_` before environment variables.
@@ -61,7 +67,9 @@ export const environment = {
   pgHost: process.env.MATTERS_PG_HOST,
   pgUser: process.env.MATTERS_PG_USER,
   pgPassword: process.env.MATTERS_PG_PASSWORD,
-  pgDatabase: process.env.MATTERS_PG_DATABASE,
+  pgDatabase: isTest
+    ? 'test_' + process.env.MATTERS_PG_DATABASE
+    : process.env.MATTERS_PG_DATABASE,
   ipfsHost: process.env.MATTERS_IPFS_HOST || '',
   ipfsPort: process.env.MATTERS_IPFS_PORT || '5001',
   pubSubHost: process.env.MATTERS_PUBSUB_HOST as string,
@@ -104,9 +112,3 @@ export const environment = {
   slackStripeAlertChannel: process.env.MATTERS_SLACK_STRIPE_ALERT_CHANNEL || '',
   openExchangeRatesAppId: process.env.MATTERS_OPEN_EXCHANGE_RATES_APP_ID || '',
 }
-
-export const isLocal = environment.env === 'local'
-export const isTest = environment.env === 'test'
-export const isDev = environment.env === 'development'
-export const isStage = environment.env === 'stage'
-export const isProd = environment.env === 'production'

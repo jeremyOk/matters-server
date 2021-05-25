@@ -231,9 +231,9 @@ exports.up = async (knex) => {
   /**
    * delete all `pending_like` to re-transfer
    */
-  await knex(likecoin_table).select().update({
+  return knex(likecoin_table).select().update({
     pending_like: null,
   })
 }
 
-exports.down = () => {}
+exports.down = (knex, Promise) => Promise.resolve()

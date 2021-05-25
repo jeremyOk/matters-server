@@ -197,7 +197,7 @@ const SUBSCRIBE_CIRCLE = /* GraphQL */ `
   }
 `
 
-describe('circle CRUD', () => {
+describe.only('circle CRUD', () => {
   // shared setting
   const errorPath = 'errors.0.extensions.code'
 

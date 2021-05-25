@@ -1,13 +1,12 @@
 const table = 'tag'
+const column = 'owner'
 
-exports.up = async (knex) => {
-  await knex.schema.table(table, function (t) {
-    t.bigInteger('owner').unsigned().nullable()
+exports.up = (knex) =>
+  knex.schema.table(table, function (t) {
+    t.bigInteger(column).unsigned().nullable()
   })
-}
 
-exports.down = async (knex) => {
-  await knex.schema.table(table, function (t) {
-    t.dropColumn('owner')
-  })
-}
+exports.down = (knex) =>
+  knex.raw(/*sql*/ `
+    ALTER TABLE ${table}
+    DROP COLUMN ${column} CASCADE;`)

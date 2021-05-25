@@ -1,5 +1,5 @@
-exports.up = async (knex) => {
-  await knex.raw(`
+exports.up = (knex) =>
+  knex.raw(/*sql*/ `
     UPDATE
       circle_subscription_item
     SET
@@ -15,6 +15,5 @@ exports.up = async (knex) => {
     WHERE
       circle_subscription_item.id = canceled_sub_item.id
   `)
-}
 
-exports.down = () => {}
+exports.down = (knex, Promise) => Promise.resolve()

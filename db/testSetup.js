@@ -30,10 +30,16 @@ module.exports = async () => {
     database: 'postgres',
   })
 
-  // create new test db everytime
+  // create new test db if doesn't exist
   client.connect()
-  await client.query('DROP DATABASE IF EXISTS "' + database + '"')
-  await client.query('CREATE DATABASE "' + database + '"')
+  const db = await client.query(
+    "SELECT 1 FROM pg_database WHERE datname = '" + database + "'"
+  )
+
+  if (db.rowCount < 1) {
+    await client.query('CREATE DATABASE "' + database + '"')
+  }
+
   client.end()
 
   await rollbackAllMigrations()

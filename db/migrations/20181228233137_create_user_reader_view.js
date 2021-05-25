@@ -47,6 +47,4 @@ exports.up = async (knex) =>
                     user_boost) as b on "user".id = b.user_id
   `)
 
-exports.down = function (knex, Promise) {
-  return knex.raw(/*sql*/ `drop view ${table}`)
-}
+exports.down = (knex) => knex.raw(/*sql*/ `drop view if exists ${table}`)
